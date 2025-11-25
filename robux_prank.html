@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Robux Generator</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1f25, #0c1014);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding-top: 40px;
+        }
+        .box {
+            background: #11161d;
+            width: 400px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        img {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+        input, button {
+            width: 90%;
+            padding: 12px;
+            font-size: 16px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border: none;
+        }
+        input {
+            background: #0d1117;
+            color: white;
+            border: 1px solid #2c323a;
+        }
+        button {
+            background: #00c200;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #loading {
+            margin-top: 20px;
+            display: none;
+        }
+        #bar {
+            width: 100%;
+            height: 22px;
+            background: #2a2f36;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #progress {
+            height: 100%;
+            width: 0%;
+            background: #00ff00;
+            transition: width 0.1s;
+        }
+        #result {
+            font-size: 22px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <img src="https://tr.rbxcdn.com/724bf1b8e94b59895dfbdc4a5856b9b2/150/150/Image/Png" alt="Robux Icon">
+    <h2>Robux Generator</h2>
+
+    <p>Enter Robux amount to generate:</p>
+    <input type="number" id="amount" placeholder="e.g. 10000">
+
+    <button onclick="go()">Generate Robux</button>
+
+    <div id="loading">
+        <p>Connecting to Roblox servers...</p>
+        <div id="bar"><div id="progress"></div></div>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function go() {
+    let amt = document.getElementById("amount").value;
+    if (!amt || amt <= 0) {
+        alert("Enter a valid amount.");
+        return;
+    }
+
+    document.getElementById("loading").style.display = "block";
+
+    let p = document.getElementById("progress");
+    let r = document.getElementById("result");
+
+    let width = 0;
+    let timer = setInterval(() => {
+        width += 2;
+        p.style.width = width + "%";
+
+        if (width >= 100) {
+            clearInterval(timer);
+            setTimeout(() => {
+                r.style.display = "block";
+                r.innerHTML = 
+                    "<b>Robux Requested:</b> " + amt +
+                    "<br><br><b>Robux Delivered:</b> 0 😂<br><br>" +
+                    "You’ve been <b>PRANKED</b>!";
+            }, 400);
+        }
+    }, 50);
+}
+</script>
+
+</body>
+</html>
